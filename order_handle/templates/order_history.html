@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your Purchase History</h2>
+    <div class="row justify-content-center align-items-center p-3">
+        {% for order in orders %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{order.image.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Model : {{ order.car.name }}</h5>
+              <p class="card-title"><b>Details :</b> {{ order.car.description | truncatewords:10 }}</p>
+              <p class="card-text"></p>
+              {% comment %} <a href="#" class="btn btn-warning">Price : ${{order.car.price}}</a> {% endcomment %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

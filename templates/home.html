@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="d-flex flex-wrap px-5 pt-3 align-items-center">
+  <div class="col-6">
+    <h1>Welcome to Car Mart</h1>
+    <p>
+      If you’ve been lucky in life, or just like admiring the most exciting cars on the planet, here’s our list of the best supercars on sale.
+      The word ‘supercar’ has been used in its current sense since the 1960s, with the Lamborghini Miura generally considered to be the first such vehicle. And while no concrete definition ‘supercar’ has ever been officially adopted, it has been said that a mid-engined two-seater with at least eight cylinders, making 400hp or more and being capable of at least 180mph fits the bill.
+    </p>
+  </div>
+  <div class="col-6 ">
+    <img src="{% static 'car.jpg' %}" class="img-fluid" alt="Responsive image">
+  </div>
+</div>
+
+
+
+
+{% comment %} <div class="d-flex flex-wrap p-4">
+<div class="col-2 bg-white p-3" >
+    <h5>All Brands</h5>
+    {% for car in car_brand %}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="car_brand" id="{{car.id}}">
+      <label class="form-check-label" for="{{car.name}}">
+        <a href="{% url 'car_wise_brand' car.slug %}">{{car.name}}</a>
+      </label>
+    </div>
+    {% endfor %}
+  </div> {% endcomment %}
+<div class="container">
+ <div class="row justify-content-center align-items-center" >
+    
+   <h5>All Brands</h5>
+    {% for car in car_brand %}
+    <div class="col-lg-auto bg-white p-3">
+      <input class="form-check-input" type="radio" name="car_brand" id="{{car.id}}">
+      <a class="form-check-label" for="{{car.name}}">
+        <a href="{% url 'car_wise_brand' car.slug %}">{{car.name}}</a>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+<div class="d-flex flex-wrap p-3">
+
+
+  <div class="col-10 p-3">
+    <h4>{{data | length}} results found</h4>
+    <div class="d-flex flex-wrap pt-5">
+      {% for car in data %}
+      <div class="col-sm-3">
+        <div class="card m-2">
+          <div class="card-body">
+            <img class="card-img-top p-1" src="{{car.image.url}}" alt="Card image cap">
+            <h4 class="card-title"><a href="{% url 'car_detail' car.id %}" class="text-decoration-none text-dark">Model : {{car.name}}</a></h4>
+            {% comment %} <p class="card-text">{{car.description |truncatewords:10 }}</p> {% endcomment %}
+            <p class="card-text btn btn-warning">Price : ${{car.price}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

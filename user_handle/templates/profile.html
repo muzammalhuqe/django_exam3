@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h1>Welcome to Profile</h1>
+<h1>Hello : {{user}}</h1>
+<br>
+<div>
+  <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Your Profile</a>
+</div>
+<br />
+<h2>Your Purchase History</h2>
+    <div class="row justify-content-center align-items-center p-3">
+        {% for order in orders %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{order.car.image.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Brand : {{ order.car.brand.name }}</h5>
+              <h5 class="card-title">Model : {{ order.car.name }}</h5>
+              <p class="card-title"><b>Details :</b> {{ order.car.description | truncatewords:10 }}</p>
+              <p class="card-text"></p>
+              {% comment %} <a href="#" class="btn btn-warning">Price : ${{order.car.price}}</a> {% endcomment %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
